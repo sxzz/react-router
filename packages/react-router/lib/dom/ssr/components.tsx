@@ -76,7 +76,8 @@ export function useFrameworkContext(): FrameworkContextObject {
 // Public API
 
 /**
- * Defines the discovery behavior of the link:
+ * Defines the [lazy route discovery](../../explanation/lazy-route-discovery)
+ * behavior of the link/form:
  *
  * - "render" - default, discover the route when the link renders
  * - "none" - don't eagerly discover, only discover if the link is clicked
@@ -370,7 +371,7 @@ function PrefetchPageLinksImpl({
   matches: AgnosticDataRouteMatch[];
 }) {
   let location = useLocation();
-  let { manifest, routeModules } = useFrameworkContext();
+  let { future, manifest, routeModules } = useFrameworkContext();
   let { basename } = useDataRouterContext();
   let { loaderData, matches } = useDataRouterStateContext();
 
@@ -434,7 +435,12 @@ function PrefetchPageLinksImpl({
       return [];
     }
 
-    let url = singleFetchUrl(page, basename, "data");
+    let url = singleFetchUrl(
+      page,
+      basename,
+      future.unstable_trailingSlashAwareDataRequests,
+      "data",
+    );
     // When one or more routes have opted out, we add a _routes param to
     // limit the loaders to those that have a server loader and did not
     // opt out
@@ -451,6 +457,7 @@ function PrefetchPageLinksImpl({
     return [url.pathname + url.search];
   }, [
     basename,
+    future.unstable_trailingSlashAwareDataRequests,
     loaderData,
     location,
     manifest,

@@ -1,6 +1,6 @@
 {
   "name": "react-router",
-  "version": "7.10.1",
+  "version": "7.11.0",
   "description": "Declarative routing for React",
   "keywords": [
     "react",
@@ -112,6 +112,7 @@
     "build": {
       "command": "tsdown",
       "files": [
+        "../../pnpm-workspace.yaml",
         "lib/**",
         "*.ts",
         "*.mts",
@@ -133,13 +134,13 @@
     "@testing-library/user-event": "^14.6.1",
     "@types/set-cookie-parser": "^2.4.1",
     "jest-environment-jsdom": "^29.6.2",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
+    "react": "catalog:",
+    "react-dom": "catalog:",
     "react-test-renderer": "^19.1.0",
     "tsdown": "^0.18.1",
     "typescript": "^5.1.6",
     "undici": "^6.19.2",
-    "wireit": "0.14.9"
+    "wireit": "catalog:"
   },
   "peerDependencies": {
     "react": ">=18",
